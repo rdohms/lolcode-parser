@@ -1,0 +1,12 @@
+{
+    "name": "rdohms/lol-code-parser",
+    "description": "PHP LOLCODE parser, based on the work of TetraBoy and MailChimp",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "rdohms",
+            "email": "rdohms@gmail.com"
+        }
+    ],
+    "require": {}
+}

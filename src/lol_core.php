@@ -44,7 +44,7 @@ function lol_core_replace($code) {
         '/^[\s]*MUST HAS SQL$/','',
         '/^[\s]*CAN HAS ([^\.]+)\?$/','include(\'$1\');',
         '/^[\s]*MUST HAS ([^\.]+)$/','require(\'$1\');',
-        
+
         '/^[\s]*VISIBLE ([a-zA-Z0-9-]+)$/','echo $$1;',
         '/^[\s]*VISIBLE[\s]*$/','echo "\n";',
         '/^[\s]*VISIBLE __(.*)__$/','echo __$1__;',
@@ -56,38 +56,39 @@ function lol_core_replace($code) {
         '/^[\s]*VISIBLEZ (.*)$/','echo "$1\n";',
 
         '/^[\s]*INVISIBLE (.*)$/','',
-        
+
         '/^[\s]*I HAS ([a-zA-Z0-9_-]+)$/','$$1 = null;',
         '/^[\s]*I HAS ([a-zA-Z0-9_-]+) IZ (BUKKIT)[\s]*$/','$$1 = array(',
         '/^[\s]*I HAS ([a-zA-Z0-9_-]+) IZ ([a-zA-Z0-9]+)$/','$$1 = \'$2\';',
         '/^[\s]*I HAS ([a-zA-Z0-9_-]+) IZ (.*)$/','$$1 = $2;',
-        
+
         '/^[\s]*I HAS[\s]+(.*)[\s]+IN MAH BUKKIT ITZ[\s]*\n?\r?[\s]*(.*)[\s]*\n?\r?KTHX!/m', '\'$1\' => trim(\'$2\'),',
 
         '/[\s]*I IS BORED[\s]*$/', ');',
-                
+
         '/^[\s]*GIMMEH ([a-zA-Z0-9_-]+)[\s]*$/', '$$1 = lol_core_io("LINE", "STDIN");',
         '/^[\s]*GIMMEH LINE[\s]+([a-zA-Z0-9_-]+)[\s]*$/', '$$1 = lol_core_io("LINE", "STDIN");',
-        '/^[\s]*GIMMEH WERD ([a-zA-Z0-9_-]+)[\s]*$/', '$$1 = lol_core_io("WERD", "STDIN");',  
-        
-        '/^[\s]*GIMMEH[\s]+([a-zA-Z0-9_-]+) OUTTA (.*)$/', '$$1 = lol_core_io("LINE", "$2");',  
+        '/^[\s]*GIMMEH WERD ([a-zA-Z0-9_-]+)[\s]*$/', '$$1 = lol_core_io("WERD", "STDIN");',
+
+        '/^[\s]*GIMMEH[\s]+([a-zA-Z0-9_-]+) OUTTA (.*)$/', '$$1 = lol_core_io("LINE", "$2");',
         '/^[\s]*GIMMEH[\s]+([A-Z]*)[\s]+([a-zA-Z0-9_-]+) OUTTA (.*)$/', '$$2 = lol_core_io("$1", "$3");',
-        
+
         '/^[\s]*MOARAGINS[\s]+([a-zA-Z0-9_-]+)[\s]*$/', 'eval(\'?>\'.lol_core_parse($$1));',
 
+        '/^[\s]*([a-zA-Z0-9_-]+) IZ RANDOM ([a-zA-Z0-9_-]+)$/','$random = array_rand($$2); $$1 = $$2[$random];',
 
         '/^[\s]*([a-zA-Z0-9_-]+) IZ (BUKKIT)$/','$$1 = array(',
         '/^[\s]*([a-zA-Z0-9_-]+) IZ ([a-zA-Z0-9]+)$/','$$1 = \'$2\';',
         '/^[\s]*([a-zA-Z0-9_-]+) IZ (.*)$/','$$1 = $2;',
 
         '/^[\s]*KTHX[\s]*$/','}',
-        
+
         '/^[\s]*([a-zA-Z0-9_-]+) UPUP![\s]*$/','$$1++;',
         '/^[\s]*([a-zA-Z0-9_-]+) DOWNDOWN![\s]*$/','$$1--;',
-        
+
         '/^[\s]*I FOUND MAH ([a-zA-Z0-9_-]+)[\s]*$/','return $$1;',
         '/^[\s]*I FOUND MAH (.*)$/','return $1;',
-        
+
         '/^[\s]*SO IM LIKE ([a-zA-Z0-9_-]+) WITH (.*)$/','lol_core_pregFunc(\'$1\',\'$2\');',
         '/^[\s]*BTW (.*)$/','',
         '/^[\s]*BTW![\s]*$/','/*',
@@ -105,7 +106,9 @@ function lol_core_replace($code) {
         '/^[\s]*IM IN UR ([a-zA-Z0-9_-]+) ITZA ([a-zA-Z0-9_-]+) IZ ([a-zA-Z0-9_-]+)[\s]*$/','foreach($$1 as $$2=>$$3) {',
         '/^[\s]*IM IN UR ([a-zA-Z0-9_-]+) ITZA (.*)$/','foreach($$1 as $2) {',
         '/^[\s]*DIAF (.*)$/','die($1);',
-        '/^[\s]*POOPONIT! (.*)$/','var_dump($$1,true);'
+        '/^[\s]*POOPONIT! (.*)$/','var_dump($$1,true);',
+
+
     );
     $search = array();
     $replace = array();
@@ -131,7 +134,7 @@ function lol_core_replace($code) {
         }
         die();
     }
-    
+
 }
 
 function debug($str){
@@ -160,7 +163,7 @@ function lolparse($lines, $replace, $search, $lineno=1, $bukkitsofbukkits=false)
                 $newline = preg_replace($pat,$rep,$line);
             } else {
                 $newline = preg_replace($search,$replace,$line);
-                
+
                 if (preg_match('/^lol_core_.*/',trim($newline))){
                     debug($newline."\n");
                     eval('$newline = '.$newline);

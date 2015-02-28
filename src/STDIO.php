@@ -23,8 +23,8 @@ THE SOFTWARE.
 */
 function lol_core_io($what, $where){
 
-    if ($where == "STDIN"){
-        $fh = fopen('php://stdin','r');
+    if ($where == "STDIN") {
+        $fh = fopen('php://stdin', 'r');
         echo "gimmeh input: ";
         $result = fgets($fh);
         fclose($fh);
@@ -55,12 +55,15 @@ function lol_core_io($what, $where){
         }
        $result = file_get_contents($where);
     }
+
     switch($what){
         case "LAL": return $result; break;
         case "WERD": $parts = explode(' ',$result);
                      return $parts[0]; break;
         case "LETTA": return substr($parts[0],0,1); break;
-        case "LINE": 
+        case "BUKKIT":
+            return explode("\n", $result);
+        case "LINE":
         default:
                 $parts = explode("\n",$result);
                 return $parts[0]; break;
