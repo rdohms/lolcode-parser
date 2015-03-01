@@ -47,10 +47,20 @@ class LolCodeCommand extends Command
             return;
         }
 
+        if ($input->getOption('debug')) {
+            global $DBG;
+            $DBG = true;
+
+            $output->writeln("## Parser debug:");
+        }
 
         $phpcode = \lol_core_parse($lolcode);
 
         if ($input->getOption('debug')) {
+
+            global $DBG;
+            $DBG = true;
+
             $output->writeln("## Generated PHP code to be executed:");
             $output->writeln(sprintf("<info>%s</info>", $phpcode));
             $output->writeln("");

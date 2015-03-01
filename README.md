@@ -5,8 +5,14 @@ It has support for a few more features and may get an overhaul for composer supp
 
 ## Usage
 
-`php src/exec.php <file>`
-    
+`php bin/lolcode.php <file>`
+
+or 
+
+`php bin/lolcode.php -d <file>`
+
+To enable debug and see generated code.
+
 ## Examples
 
 We've packaged up some example scripts in the ./examples/ directory. Here's what they do:
