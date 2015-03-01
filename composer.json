@@ -1,5 +1,5 @@
 {
-    "name": "rdohms/lol-code-parser",
+    "name": "dms/lolcode-parser",
     "description": "PHP LOLCODE parser, based on the work of TetraBoy and MailChimp",
     "license": "MIT",
     "authors": [
@@ -8,5 +8,20 @@
             "email": "rdohms@gmail.com"
         }
     ],
-    "require": {}
+    "autoload": {
+        "psr-4": {
+            "DMS\\": "src/"
+        },
+        "files": [
+            "src/lol_core.php",
+            "src/SQL.php",
+            "src/STDIO.php"
+        ]
+    },
+    "bin": [
+        "bin/lolcode.php"
+    ],
+    "require": {
+        "symfony/console": "~2.6"
+    }
 }
